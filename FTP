@@ -1,0 +1,25 @@
+FTP - Rocky Linux 9
+=========================
+
+dnf install vsftpd -y
+
+=========================
+/etc/vsftpd/vsftpd.conf
+        anonymous_enable=NO
+        local_enable=YES
+        write_enable=YES
+        userlist_enable=YES
+        userlist_file=/etc/vsftpd/db_users.userlist
+        userlist_deny=NO
+        local_root=/data
+
+chmod o+w /data
+=========================
+Add New User For login
+useradd UserName
+passwd UserName
+echo “UserName” >> /etc/vsftpd/db_users.userlist
+
+=========================
+systemctl restart vsftpd
+systemctl enable vsftpd
