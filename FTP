@@ -11,15 +11,15 @@ dnf install vsftpd -y
         userlist_enable=YES
         userlist_file=/etc/vsftpd/db_users.userlist
         userlist_deny=NO
-        local_root=/data
+        local_root=/srv/data
 
-chmod o+w /data
-=========================
-Add New User For login
+mkdri /srv/data
+chmod o+w /srv/data
+
+#Add New User For login
 useradd UserName
 passwd UserName
 echo “UserName” >> /etc/vsftpd/db_users.userlist
-
-=========================
+==========================
 systemctl restart vsftpd
 systemctl enable vsftpd
