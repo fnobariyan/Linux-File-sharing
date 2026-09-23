@@ -1,0 +1,22 @@
+#Install on both Server and Client
+dnf install nfs-utils -y
+
+=======================
+#On Server
+	vim /etc/export
+		/srv/mcloud_source 192.168.83.141(ro,sync,root_squash)
+		/srv/mcloud_source 192.168.83.142(ro,sync,root_squash)
+	
+  systemctl restart nfs-server
+========================
+On Client
+dnf install nfs-utils -y
+	showmount -e 192.168.83.150
+	vim /etc/fstab
+		192.168.83.150:/srv/mcloud_source       /var/www/mcloud nfs     defaults        0 0
+	
+	systemctl daemon-reload
+	systemctl restart httpd
+	systemctl enable httpd
+	df -h
+
